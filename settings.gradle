@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 rootProject.name = "Space X Launches"
 include ':app'
 include ':data:launch_repository'
+include ':data:spacex-api'
