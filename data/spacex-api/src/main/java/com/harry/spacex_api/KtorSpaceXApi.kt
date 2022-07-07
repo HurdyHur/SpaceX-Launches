@@ -30,7 +30,7 @@ internal class KtorSpaceXApi : SpaceXApi {
 
         return try {
             val response: String = client.get("$BASE_URL/launches").body()
-            val decodedResponse = Json.decodeFromString<List<Launch>>(response)
+            val decodedResponse = Json { ignoreUnknownKeys = true }.decodeFromString<List<Launch>>(response)
             client.close()
 
             LaunchResponse.Success(decodedResponse)
@@ -41,6 +41,6 @@ internal class KtorSpaceXApi : SpaceXApi {
     }
 
     companion object {
-        private const val BASE_URL = "https://api.spacexdata.com/v4/"
+        private const val BASE_URL = "https://api.spacexdata.com/v4"
     }
 }
