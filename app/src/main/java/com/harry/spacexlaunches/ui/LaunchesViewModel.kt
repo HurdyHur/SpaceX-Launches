@@ -40,7 +40,7 @@ class LaunchesViewModel(private val launchesRepository: LaunchRepository = Launc
         val formattedDate = try {
             val sdf = SimpleDateFormat("dd/MM/yyyy")
             val netDate = Date(launchDate * 1000)
-            "Launch Date: ${sdf.format(netDate)}"
+            sdf.format(netDate)
         } catch (e : Exception) {
             ""
         }
@@ -51,12 +51,10 @@ class LaunchesViewModel(private val launchesRepository: LaunchRepository = Launc
             "\u2715"
         }
 
-        val missionSuccessfulFormatted = "Mission Successful: $missionSuccessMark"
-
         return LaunchItem(
             name = name,
             launchDate = formattedDate,
-            missionSuccessful = missionSuccessfulFormatted,
+            missionSuccessful = missionSuccessMark,
             patchImageUrl = patchImageUrl
         )
     }

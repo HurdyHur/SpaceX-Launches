@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Space X Launches</string>
+
+    <string name="launch_title">Falcon 9 Launches</string>
+    <string name="launch_item_date">Launch Date: %1$s</string>
+    <string name="launch_item_mission_success">Mission Successful %1$s</string>
 </resources>

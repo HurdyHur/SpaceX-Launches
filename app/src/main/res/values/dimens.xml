@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="top_bar_text_size">24sp</dimen>
+    <dimen name="launch_item_title_text_size">22sp</dimen>
+    <dimen name="default_padding">8dp</dimen>
+</resources>
