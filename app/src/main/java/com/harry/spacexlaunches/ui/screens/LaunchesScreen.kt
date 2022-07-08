@@ -8,13 +8,13 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.Center
-import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -28,7 +28,7 @@ import com.harry.spacexlaunches.ui.theme.SpaceXLaunchesTheme
 import java.util.*
 
 @Composable
-fun LaunchesScreen(launches: LaunchUi) {
+fun LaunchesScreen(launches: LaunchUi, onRetryClicked: () -> Unit) {
     Column {
         TopAppBar {
             Text(
@@ -41,15 +41,42 @@ fun LaunchesScreen(launches: LaunchUi) {
 
         when (launches) {
             is LaunchUi.Success -> LaunchList(launches = launches.launches)
-            is LaunchUi.Failure -> {}
+            is LaunchUi.Failure -> FailedView(onRetryClicked)
             is LaunchUi.Loading -> LoadingView()
         }
     }
 }
 
 @Composable
+fun FailedView(onRetryClicked: () -> Unit) {
+    ConstraintLayout(modifier = Modifier.fillMaxSize()) {
+        val (errorMessage, retryButton) = createRefs()
+
+        Text(
+            text = stringResource(id = R.string.error_message),
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .fillMaxWidth(0.8f)
+                .constrainAs(errorMessage) {
+                    start.linkTo(parent.start)
+                    top.linkTo(parent.top)
+                    end.linkTo(parent.end)
+                    bottom.linkTo(parent.bottom)
+                })
+
+        Button(onClick = onRetryClicked, modifier = Modifier.constrainAs(retryButton) {
+            start.linkTo(parent.start)
+            end.linkTo(parent.end)
+            top.linkTo(errorMessage.bottom)
+        }) {
+            Text(text = stringResource(id = R.string.retry_button))
+        }
+    }
+}
+
+@Composable
 fun LoadingView() {
-    Box(contentAlignment = Center, modifier = Modifier.fillMaxSize() ) {
+    Box(contentAlignment = Center, modifier = Modifier.fillMaxSize()) {
         CircularProgressIndicator()
     }
 }
@@ -145,6 +172,6 @@ fun LaunchesScreenPreview() {
         )
         val launches = listOf(launch, launch, launch, launch)
 
-        LaunchesScreen(launches = LaunchUi.Success(launches))
+        LaunchesScreen(launches = LaunchUi.Success(launches)) {}
     }
 }

@@ -4,4 +4,7 @@
     <string name="launch_title">Falcon 9 Launches</string>
     <string name="launch_item_date">Launch Date: %1$s</string>
     <string name="launch_item_mission_success">Mission Successful %1$s</string>
+
+    <string name="error_message">Sorry, something went wrong while attempting to retrieve launches</string>
+    <string name="retry_button">Retry</string>
 </resources>
