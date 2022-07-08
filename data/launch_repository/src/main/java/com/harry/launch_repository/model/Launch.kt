@@ -6,6 +6,6 @@ sealed class Launches {
 }
 
 data class Launch(val name: String,
-                  val launchDate: String,
+                  val launchDate: Long,
                   val missionSuccessful: Boolean,
                   val patchImageUrl: String)

@@ -11,6 +11,6 @@ sealed class LaunchUi {
 data class LaunchItem(
     val name: String,
     val launchDate: String,
-    val missionSuccessful: Boolean,
+    val missionSuccessful: String,
     val patchImageUrl: String
 )

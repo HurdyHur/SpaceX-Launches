@@ -11,8 +11,8 @@ sealed class LaunchResponse {
 @Serializable
 data class Launch(
     val name: String,
-    @SerialName("date_local")
-    val date: String,
+    @SerialName("date_unix")
+    val date: Long,
     val rocket: String,
     val success: Boolean?,
     val links: LinksResponse

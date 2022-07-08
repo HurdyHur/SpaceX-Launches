@@ -10,6 +10,10 @@ import com.harry.launch_repository.model.Launches
 import com.harry.spacexlaunches.ui.model.LaunchItem
 import com.harry.spacexlaunches.ui.model.LaunchUi
 import kotlinx.coroutines.launch
+import java.sql.Date
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class LaunchesViewModel(private val launchesRepository: LaunchRepository = LaunchRepository.getLaunchRepository()) :
     ViewModel() {
@@ -33,10 +37,26 @@ class LaunchesViewModel(private val launchesRepository: LaunchRepository = Launc
     }
 
     private fun Launch.toLaunchItem(): LaunchItem {
+        val formattedDate = try {
+            val sdf = SimpleDateFormat("dd/MM/yyyy")
+            val netDate = Date(launchDate * 1000)
+            "Launch Date: ${sdf.format(netDate)}"
+        } catch (e : Exception) {
+            ""
+        }
+
+        val missionSuccessMark = if (missionSuccessful) {
+            "\u2713"
+        } else {
+            "\u2715"
+        }
+
+        val missionSuccessfulFormatted = "Mission Successful: $missionSuccessMark"
+
         return LaunchItem(
             name = name,
-            launchDate = launchDate,
-            missionSuccessful = missionSuccessful,
+            launchDate = formattedDate,
+            missionSuccessful = missionSuccessfulFormatted,
             patchImageUrl = patchImageUrl
         )
     }
