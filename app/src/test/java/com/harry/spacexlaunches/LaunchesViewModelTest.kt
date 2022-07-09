@@ -1,8 +1,8 @@
 package com.harry.spacexlaunches
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.harry.launch_repository.LaunchRepository
 import com.harry.launch_repository.model.Launches
+import com.harry.spacexlaunches.launches.LaunchesUseCase
 import com.harry.spacexlaunches.launches.LaunchesViewModel
 import com.harry.spacexlaunches.launches.model.LaunchUi
 import com.harry.spacexlaunches.utils.MainCoroutineRule
@@ -21,7 +21,7 @@ class LaunchesViewModelTest {
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    private val launchesRepository: LaunchRepository = mockk()
+    private val launchesUseCase: LaunchesUseCase = mockk()
 
     @ExperimentalCoroutinesApi
     @get:Rule
@@ -31,7 +31,7 @@ class LaunchesViewModelTest {
 
     @Before
     fun setup() {
-        viewModel = LaunchesViewModel(launchesRepository)
+        viewModel = LaunchesViewModel(launchesUseCase)
     }
 
     @Test
@@ -43,22 +43,33 @@ class LaunchesViewModelTest {
 
     @Test
     fun `test when getLaunches retrieves launches from repository`() {
-        coEvery { launchesRepository.getLaunches() } returns Launches.Failure(IllegalStateException())
+        coEvery { launchesUseCase.getLaunches() } returns LaunchUi.Failure
         runTest {
             viewModel.getLaunches()
         }
 
-        coVerify { launchesRepository.getLaunches() }
+        coVerify { launchesUseCase.getLaunches() }
     }
 
     @Test
     fun `test error retrieving from repository displays failure`() {
-        coEvery { launchesRepository.getLaunches() } returns Launches.Failure(IllegalStateException())
+        coEvery { launchesUseCase.getLaunches() } returns LaunchUi.Failure
 
         runTest {
             viewModel.getLaunches()
         }
 
         assert(viewModel.launches.value is LaunchUi.Failure)
+    }
+
+    @Test
+    fun `test success retrieving from repository displays success`() {
+        coEvery { launchesUseCase.getLaunches() } returns LaunchUi.Success(mockk())
+
+        runTest {
+            viewModel.getLaunches()
+        }
+
+        assert(viewModel.launches.value is LaunchUi.Success)
     }
 }
