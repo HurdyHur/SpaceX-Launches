@@ -39,7 +39,7 @@ class LaunchRepositoryImplTest {
     }
 
     @Test
-    fun `test launches successfuly fetched returens Launchees`() {
+    fun `test launches successfuly fetched returns Launches`() {
         val expectedThrowable = IllegalStateException()
         val expectedLaunches = Launches.Failure(expectedThrowable)
 

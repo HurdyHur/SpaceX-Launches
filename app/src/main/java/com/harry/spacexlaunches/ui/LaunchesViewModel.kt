@@ -9,13 +9,14 @@ import com.harry.launch_repository.model.Launch
 import com.harry.launch_repository.model.Launches
 import com.harry.spacexlaunches.ui.model.LaunchItem
 import com.harry.spacexlaunches.ui.model.LaunchUi
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.sql.Date
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
-class LaunchesViewModel(private val launchesRepository: LaunchRepository = LaunchRepository.getLaunchRepository()) :
+class LaunchesViewModel(
+    private val launchesRepository: LaunchRepository = LaunchRepository.getLaunchRepository()):
     ViewModel() {
 
     private val launchesPublisher: MutableLiveData<LaunchUi> = MutableLiveData()
@@ -23,7 +24,8 @@ class LaunchesViewModel(private val launchesRepository: LaunchRepository = Launc
     val launches: LiveData<LaunchUi> = launchesPublisher
 
     fun getLaunches() {
-        viewModelScope.launch {
+        launchesPublisher.postValue(LaunchUi.Loading)
+        viewModelScope.launch() {
             val launches = launchesRepository.getLaunches()
             launchesPublisher.postValue(launches.toLaunchUi())
         }
@@ -41,7 +43,7 @@ class LaunchesViewModel(private val launchesRepository: LaunchRepository = Launc
             val sdf = SimpleDateFormat("dd/MM/yyyy")
             val netDate = Date(launchDate * 1000)
             sdf.format(netDate)
-        } catch (e : Exception) {
+        } catch (e: Exception) {
             ""
         }
 
