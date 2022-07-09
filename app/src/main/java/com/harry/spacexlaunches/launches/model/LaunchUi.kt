@@ -1,4 +1,4 @@
-package com.harry.spacexlaunches.ui.model
+package com.harry.spacexlaunches.launches.model
 
 sealed class LaunchUi {
 

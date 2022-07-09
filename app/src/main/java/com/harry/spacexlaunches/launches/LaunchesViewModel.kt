@@ -1,4 +1,4 @@
-package com.harry.spacexlaunches.ui
+package com.harry.spacexlaunches.launches
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,10 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.harry.launch_repository.LaunchRepository
 import com.harry.launch_repository.model.Launch
 import com.harry.launch_repository.model.Launches
-import com.harry.spacexlaunches.ui.model.LaunchItem
-import com.harry.spacexlaunches.ui.model.LaunchUi
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
+import com.harry.spacexlaunches.launches.model.LaunchItem
+import com.harry.spacexlaunches.launches.model.LaunchUi
 import kotlinx.coroutines.launch
 import java.sql.Date
 import java.text.SimpleDateFormat

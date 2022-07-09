@@ -1,4 +1,4 @@
-package com.harry.spacexlaunches.ui.screens
+package com.harry.spacexlaunches.launches.ui
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -21,8 +21,8 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.harry.spacexlaunches.R
-import com.harry.spacexlaunches.ui.model.LaunchItem
-import com.harry.spacexlaunches.ui.model.LaunchUi
+import com.harry.spacexlaunches.launches.model.LaunchItem
+import com.harry.spacexlaunches.launches.model.LaunchUi
 import com.harry.spacexlaunches.ui.theme.SpaceXLaunchesTheme
 import java.util.*
 

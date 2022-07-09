@@ -3,8 +3,8 @@ package com.harry.spacexlaunches
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.harry.launch_repository.LaunchRepository
 import com.harry.launch_repository.model.Launches
-import com.harry.spacexlaunches.ui.LaunchesViewModel
-import com.harry.spacexlaunches.ui.model.LaunchUi
+import com.harry.spacexlaunches.launches.LaunchesViewModel
+import com.harry.spacexlaunches.launches.model.LaunchUi
 import com.harry.spacexlaunches.utils.MainCoroutineRule
 import io.mockk.coEvery
 import io.mockk.coVerify

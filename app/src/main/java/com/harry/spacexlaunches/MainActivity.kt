@@ -10,9 +10,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.harry.spacexlaunches.ui.LaunchesViewModel
-import com.harry.spacexlaunches.ui.model.LaunchUi
-import com.harry.spacexlaunches.ui.screens.LaunchesScreen
+import com.harry.spacexlaunches.launches.LaunchesViewModel
+import com.harry.spacexlaunches.launches.model.LaunchUi
+import com.harry.spacexlaunches.launches.ui.LaunchesScreen
 import com.harry.spacexlaunches.ui.theme.SpaceXLaunchesTheme
 
 class MainActivity : ComponentActivity() {
