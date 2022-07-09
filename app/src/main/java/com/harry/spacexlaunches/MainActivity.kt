@@ -27,7 +27,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize()
                 ) {
                     launchesViewModel.getLaunches()
-                    LaunchesScreen(launchesViewModel.launches.observeAsState().value ?: LaunchUi.Loading
+                    LaunchesScreen(
+                        launchesViewModel.launches.observeAsState().value
+                            ?: LaunchUi.Loading
                     ) {
                         launchesViewModel.getLaunches()
                     }

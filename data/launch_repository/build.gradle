@@ -8,5 +8,7 @@ dependencies {
     implementation project(":data:spacex-api")
 
     testImplementation 'junit:junit:4.13.2'
+    testImplementation "org.mockito.kotlin:mockito-kotlin:$mockito_version"
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.3")
 
 }

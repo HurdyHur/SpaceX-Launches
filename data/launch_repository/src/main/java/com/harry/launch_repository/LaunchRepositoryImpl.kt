@@ -27,9 +27,7 @@ internal class LaunchRepositoryImpl(private val spacexApi: SpaceXApi = SpaceXApi
 
                 return Launches.Success(mappedLaunches)
             }
-            is LaunchResponse.Failure -> {
-                Launches.Failure(error)
-            }
+            is LaunchResponse.Failure -> Launches.Failure(error)
         }
     }
 }
