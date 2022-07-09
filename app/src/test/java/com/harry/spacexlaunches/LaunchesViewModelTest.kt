@@ -42,7 +42,7 @@ class LaunchesViewModelTest {
     }
 
     @Test
-    fun `test when getLaunches retrieves launches from repository`() {
+    fun `test when getLaunches retrieves launches from use case`() {
         coEvery { launchesUseCase.getLaunches() } returns LaunchUi.Failure
         runTest {
             viewModel.getLaunches()
@@ -52,7 +52,7 @@ class LaunchesViewModelTest {
     }
 
     @Test
-    fun `test error retrieving from repository displays failure`() {
+    fun `test error retrieving from use case displays failure`() {
         coEvery { launchesUseCase.getLaunches() } returns LaunchUi.Failure
 
         runTest {
@@ -63,7 +63,7 @@ class LaunchesViewModelTest {
     }
 
     @Test
-    fun `test success retrieving from repository displays success`() {
+    fun `test success retrieving from use case displays success`() {
         coEvery { launchesUseCase.getLaunches() } returns LaunchUi.Success(mockk())
 
         runTest {
