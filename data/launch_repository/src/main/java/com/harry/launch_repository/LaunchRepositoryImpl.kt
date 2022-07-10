@@ -21,7 +21,7 @@ internal class LaunchRepositoryImpl(private val spacexApi: SpaceXApi = SpaceXApi
                     Launch(
                         name = it.name, launchDate = it.date,
                         missionSuccessful = it.success ?: false,
-                        patchImageUrl = it.links.patch?.large ?: ""
+                        patchImageUrl = it.links.patch?.small ?: ""
                     )
                 }
 

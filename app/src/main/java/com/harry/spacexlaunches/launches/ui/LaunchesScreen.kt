@@ -5,7 +5,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -18,8 +19,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.lifecycle.LiveData
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.harry.launch_repository.model.Launches
 import com.harry.spacexlaunches.R
 import com.harry.spacexlaunches.launches.model.LaunchItem
 import com.harry.spacexlaunches.launches.model.LaunchUi
@@ -27,7 +30,8 @@ import com.harry.spacexlaunches.ui.theme.SpaceXLaunchesTheme
 import java.util.*
 
 @Composable
-fun LaunchesScreen(launches: LaunchUi, onRetryClicked: () -> Unit) {
+fun LaunchesScreen(launches: LiveData<LaunchUi>, onRetryClicked: () -> Unit) {
+    val launchList = launches.observeAsState().value
     Column {
         TopAppBar {
             Text(
@@ -38,10 +42,10 @@ fun LaunchesScreen(launches: LaunchUi, onRetryClicked: () -> Unit) {
             )
         }
 
-        when (launches) {
-            is LaunchUi.Success -> LaunchList(launches = launches.launches)
+        when (launchList) {
+            is LaunchUi.Success -> LaunchList(launches = launchList.launches)
             is LaunchUi.Failure -> FailedView(onRetryClicked)
-            is LaunchUi.Loading -> LoadingView()
+            else -> LoadingView()
         }
     }
 }
@@ -171,6 +175,6 @@ fun LaunchesScreenPreview() {
         )
         val launches = listOf(launch, launch, launch, launch)
 
-        LaunchesScreen(launches = LaunchUi.Success(launches)) {}
+        LaunchList(launches = launches)
     }
 }
