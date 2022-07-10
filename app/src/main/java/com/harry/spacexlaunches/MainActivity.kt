@@ -12,12 +12,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.harry.spacexlaunches.launches.LaunchesViewModel
 import com.harry.spacexlaunches.launches.ui.LaunchesScreen
 import com.harry.spacexlaunches.ui.theme.SpaceXLaunchesTheme
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val launchesViewModel by viewModels<LaunchesViewModel>()
+        val launchesViewModel: LaunchesViewModel by viewModel()
 
         setContent {
             SpaceXLaunchesTheme {

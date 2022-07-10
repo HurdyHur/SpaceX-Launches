@@ -11,7 +11,7 @@ interface LaunchesUseCase {
     suspend fun getLaunches(): LaunchUi
 }
 
-class LaunchesUseCaseImpl(private val launchRepository: LaunchRepository = LaunchRepository.getLaunchRepository()): LaunchesUseCase {
+class LaunchesUseCaseImpl(private val launchRepository: LaunchRepository): LaunchesUseCase {
 
     private fun Launches.toLaunchUi(): LaunchUi {
         return when (this) {
