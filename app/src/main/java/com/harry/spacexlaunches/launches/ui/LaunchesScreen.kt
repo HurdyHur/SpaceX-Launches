@@ -12,6 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -22,7 +24,6 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.lifecycle.LiveData
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.harry.launch_repository.model.Launches
 import com.harry.spacexlaunches.R
 import com.harry.spacexlaunches.launches.model.LaunchItem
 import com.harry.spacexlaunches.launches.model.LaunchUi
@@ -80,7 +81,10 @@ fun FailedView(onRetryClicked: () -> Unit) {
 @Composable
 fun LoadingView() {
     Box(contentAlignment = Center, modifier = Modifier.fillMaxSize()) {
-        CircularProgressIndicator()
+        val spinnerContentDescription = stringResource(id = R.string.content_description_loading_spinner)
+        CircularProgressIndicator(Modifier.semantics {
+            contentDescription = spinnerContentDescription
+        })
     }
 }
 
