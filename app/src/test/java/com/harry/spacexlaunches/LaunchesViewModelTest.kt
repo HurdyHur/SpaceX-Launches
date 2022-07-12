@@ -36,7 +36,9 @@ class LaunchesViewModelTest {
 
     @Test
     fun `test when getLaunches called Loading Ui is shown`() {
-        viewModel.getLaunches()
+        runTest {
+            viewModel.getLaunches()
+        }
 
         assert(viewModel.launches.value is LaunchUi.Loading)
     }

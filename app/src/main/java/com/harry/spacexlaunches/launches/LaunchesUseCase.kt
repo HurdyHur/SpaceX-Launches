@@ -13,6 +13,8 @@ interface LaunchesUseCase {
 
 class LaunchesUseCaseImpl(private val launchRepository: LaunchRepository): LaunchesUseCase {
 
+    override suspend fun getLaunches() = launchRepository.getLaunches().toLaunchUi()
+
     private fun Launches.toLaunchUi(): LaunchUi {
         return when (this) {
             is Launches.Failure -> LaunchUi.Failure
@@ -34,6 +36,4 @@ class LaunchesUseCaseImpl(private val launchRepository: LaunchRepository): Launc
             patchImageUrl = patchImageUrl
         )
     }
-
-    override suspend fun getLaunches() = launchRepository.getLaunches().toLaunchUi()
 }
