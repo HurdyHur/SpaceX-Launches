@@ -6,7 +6,7 @@ version: 2.1
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
   build:
-    working_directory: /tmp
+    working_directory: ~/SpaceX-Launches
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
     docker:
@@ -19,7 +19,7 @@ jobs:
               chmod +x gradlew
               ./gradlew assembleDebug
               mkdir /tmp/artifacts
-              mv app/build/outputs/apk/debug/app-debug.apk /tmp/artifacts
+              mv /SpaceX-Launches/app/build/outputs/apk/debug/app-debug.apk /tmp/artifacts
       - store_artifacts: 
           path: /tmp/artifacts
 
